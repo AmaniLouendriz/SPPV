@@ -4,6 +4,7 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import { AppShell } from './components/AppShell/AppShell';
 import { Home } from './Views/Home/Home';
 import { Role } from './Views/Role/Role';
+import { DashBoard } from './Views/DashBoard/DashBoard';
 
 
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<AppShell/>}>
         <Route index element={<Home/>} />
         <Route path='selectRole' element={<Role/>}/>
+        <Route path='dashboard' element={<DashBoard/>}/>
       </Route>
     )
   )

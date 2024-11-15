@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fcts from "../../ApiFcts/Api";
 import InputMask from "react-input-mask";
@@ -22,6 +22,8 @@ export const Role = ()=>{
 
     const [error,setError] = useState("");
 
+    const navigate = useNavigate();
+
     useEffect(()=>{
         async function verifyUser() {
             const userInfo = await fcts.verify(state.email);
@@ -43,6 +45,7 @@ export const Role = ()=>{
             // all is good, navigate to the user dashboard, put a state as email, role, userNumber too why not
             // if instructor, he will see far more options
             setError("");
+            navigate('/dashboard',{state:userInfo})
         }
     }
 
@@ -63,7 +66,7 @@ export const Role = ()=>{
             <p className="p-2 text-light">Please confirm your {userInfo.role.toLowerCase()} number below: </p>
             <div className="input-group mb-3 p-3 w-50">
                 <InputMask className="form-control border" mask='999999999' placeholder={`Your ${userInfo.role.toLowerCase()} number`} value={submittedUserNumber} onChange={handleChange} id="idUser" maskChar={''} name="id"/>
-                <button class="btn btn-secondary btn-outline-secondary text-light" type="button" id="button-addon2" onClick={verifyUserNumberIsCorrect}>Confirm</button>
+                <button className="btn btn-secondary btn-outline-secondary text-light" type="button" id="button-addon2" onClick={verifyUserNumberIsCorrect}>Confirm</button>
             </div>
             {error ? <div className="text-danger">{error}</div> : <div></div>}
             </>
