@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
+import { AppShell } from './components/AppShell/AppShell';
+import { Home } from './Views/Home/Home';
+import { Role } from './Views/Role/Role';
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<AppShell/>}>
+        <Route index element={<Home/>} />
+        <Route path='selectRole' element={<Role/>}/>
+      </Route>
+    )
+  )
+
+//   return (
+//     <div>
+//         <h2>React Google Login</h2>
+//         <br />
+//         <br />
+//         {profile ? (
+//             <div>
+//                 <img src={profile.picture} alt="user image" />
+//                 <h3>User Logged in</h3>
+//                 <p>Name: {profile.name}</p>
+//                 <p>Email Address: {profile.email}</p>
+//                 <br />
+//                 <br />
+//                 <button onClick={logOut}>Log out</button>
+//             </div>
+//         ) : (
+//             <button onClick={login}>Sign in with Google 🚀 </button>
+//         )}
+//     </div>
+// );
+    return <RouterProvider router={router} />;
+
 }
 
 export default App;

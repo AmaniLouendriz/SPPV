@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header {
+    background-color: #b1a0a0;
+    padding: 1rem !important;
+    text-align: center;
+}
+.title {
+    font-size: 1.5rem;
+}

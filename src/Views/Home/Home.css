@@ -1,0 +1,20 @@
+/* .wrapper {
+    background-color: blueviolet;
+} */
+
+.imageContainer {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    padding-top: 20px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.image {
+    width: 50%;
+    margin: 0 auto;
+}
