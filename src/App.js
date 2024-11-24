@@ -5,6 +5,7 @@ import { AppShell } from './components/AppShell/AppShell';
 import { Home } from './Views/Home/Home';
 import { Role } from './Views/Role/Role';
 import { DashBoard } from './Views/DashBoard/DashBoard';
+import { ProjectForm } from './Views/DashBoard/ProjectForm';
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route index element={<Home/>} />
         <Route path='selectRole' element={<Role/>}/>
         <Route path='dashboard' element={<DashBoard/>}/>
+        <Route path='projectform' element={<ProjectForm/>}/>
       </Route>
     )
   )

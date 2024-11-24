@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import fcts from "../../ApiFcts/Api";
 import { useEffect,useState } from "react";
 
@@ -10,8 +10,15 @@ export const DashBoard = ()=>{
     // console.log("the state is",state);
     const [projectsUser,setProjects] = useState([])
 
+    const navigate = useNavigate()
+
+    const createProject = ()=>{
+        navigate('/projectform',{state:state});
+    }
+
 
     useEffect(()=>{
+        //console.log("inside the useEffect, state is: ",state);
         async function getProjects(email) {
             const projects = await fcts.getAllProjects(state.email);  
             setProjects(projects);
@@ -24,7 +31,11 @@ export const DashBoard = ()=>{
     //console.log("projects are: ",projectsUser)
     return (
         <>
-            <h2 className="text-light p-3">Hello {state.email},</h2> 
+            <h2 className="text-light p-3">Hello {state.email},</h2>
+            {state.role === 'INSTRUCTOR' ? 
+                <div>    
+                    <button className="btn btn-secondary p-2 m-3 float-end" onClick={()=>createProject()}>Create a new project</button>
+            </div>:<></>}
             <h3 className="text-light p-3 text-center">Your projects</h3>
             <div className="d-flex flex-row p-3 gap-4 flex-wrap justify-content-center">
                 {projectsUser.length ? 
@@ -46,10 +57,6 @@ export const DashBoard = ()=>{
                     })
             :<>You don't have any project open yet</>}
             </div>
-            {state.role === 'INSTRUCTOR' ? 
-                <div>    
-                    <button className="btn btn-secondary p-2 m-3" onClick={()=>console.log("click me to create a new project")}>Create a new project</button>
-                </div>:<></>}
         </>
 
     )

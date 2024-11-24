@@ -2,12 +2,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fcts from "../../ApiFcts/Api";
 import InputMask from "react-input-mask";
+import supabase from "../../config/supabaseClient";
 
 
 export const Role = ()=>{
 
     // the state has the email, family_name, given_name, name, picture
-    const {state} = useLocation();
+    //const {state} = useLocation();
 
     // console.log("the state in the Role.js",state);
 
@@ -24,15 +25,31 @@ export const Role = ()=>{
 
     const navigate = useNavigate();
 
+    // useEffect(()=>{
+    //     async function verifyUser() {
+    //         const userInfo = await fcts.verify(state.email);
+    //         setUserInfo(userInfo);
+    //         //console.log("the state.email",state.email);
+    //         //console.log("doesEx",doesUserExist);
+    //     }
+    //     verifyUser();
+    // },[state])
+
     useEffect(()=>{
         async function verifyUser() {
-            const userInfo = await fcts.verify(state.email);
-            setUserInfo(userInfo);
-            //console.log("the state.email",state.email);
-            //console.log("doesEx",doesUserExist);
+            const session = await supabase.auth.getSession();  // Get the current session
+            if (session) {
+                console.log("the session is: ",session);
+                const userInfo = await fcts.verify(session.data.session.user.email)
+                setUserInfo(userInfo);
+            } else {
+                // If no session, redirect to login page
+                navigate('/');
+            }
         }
         verifyUser();
-    },[state])
+
+    },[])
 
     const verifyUserNumberIsCorrect = () => {
         console.log("verifying the student number: ",submittedUserNumber);
@@ -61,7 +78,7 @@ export const Role = ()=>{
         (userInfo) ? 
             // user is found in the database
             <>
-            <h2 className="text-light p-3">Hello {state.name},</h2> 
+            <h2 className="text-light p-3">Hello {userInfo.email},</h2> 
             <div className="p-2 text-light">You are registered with us as a : {userInfo.role.toLowerCase()}</div>
             <p className="p-2 text-light">Please confirm your {userInfo.role.toLowerCase()} number below: </p>
             <div className="input-group mb-3 p-3 w-50">
