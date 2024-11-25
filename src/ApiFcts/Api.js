@@ -129,6 +129,14 @@ const addProject = async(input,file)=>{
     return res;
 }
 
+
+fcts.logout = async()=>{
+
+    const response = await supabase.auth.signOut();
+    console.log("when trying to logout, the response is: ",response);
+    return response;
+}
+
 fcts.sendMessageToAi = async(question,projectName)=>{
     const fileResponse = await fcts.getFile(projectName);
 
@@ -143,7 +151,9 @@ fcts.sendMessageToAi = async(question,projectName)=>{
     const result = await axios.post(modelUrl,
         {inputs:chatPrompt,
             parameters:{
-                max_tokens:300,// TODO about this
+                max_tokens:3000,// TODO about this
+                top_p: 0.7, // lower for focused answers
+                temperature: 0.7, // Try lowering the value for more controlled output
             }
         },
         {
