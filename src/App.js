@@ -6,6 +6,7 @@ import { Home } from './Views/Home/Home';
 import { Role } from './Views/Role/Role';
 import { DashBoard } from './Views/DashBoard/DashBoard';
 import { ProjectForm } from './Views/DashBoard/ProjectForm';
+import { ProjectDetail } from './Views/DashBoard/ProjectDetail/ProjectDetail';
 
 
 
@@ -18,7 +19,9 @@ function App() {
         <Route index element={<Home/>} />
         <Route path='selectRole' element={<Role/>}/>
         <Route path='dashboard' element={<DashBoard/>}/>
+        <Route path='dashboard/:projectName' element={<ProjectDetail/>}/>
         <Route path='projectform' element={<ProjectForm/>}/>
+
       </Route>
     )
   )

@@ -16,6 +16,13 @@ export const DashBoard = ()=>{
         navigate('/projectform',{state:state});
     }
 
+    const goToDialoguePage = (projectName)=>{
+        console.log("This project name is: ",projectName);
+        const projectNameUpdated = projectName.replace(/\s/g, "");
+        console.log("This project name after update is: ",projectNameUpdated);
+        navigate(`/dashboard/${projectNameUpdated}`,{state:{...state,project:projectNameUpdated}});
+    }
+
 
     useEffect(()=>{
         //console.log("inside the useEffect, state is: ",state);
@@ -48,7 +55,7 @@ export const DashBoard = ()=>{
                                     <div className="card-body">
                                         <h4 style={{marginTop:"10px"}} className="card-title">{`${item.name}`}</h4>
                                         <div id="owner">Owner: {item.owner}</div>
-                                        <button className="btn btn-secondary p-2 m-3" onClick={()=>console.log("click me for details about this project")}>View</button>
+                                        <button className="btn btn-secondary p-2 m-3" onClick={()=>goToDialoguePage(item.name)}>View</button>
                                     </div>
                                 </div>
                             </div>
