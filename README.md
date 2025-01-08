@@ -1,3 +1,7 @@
+# Summary
+
+Registered professors and students can log in into the system using their google accounts, then a professor can create a project and invite people to it, the invited students would get linked to the project the professor created. To have accurate responses from the LLM, a professor should also upload a written context, which can be few lines that the real stakeholder wrote to describe themselves, their pain points, their goals from the desired system as well as any domain knowledge they are willing to share.  That way, one stakeholder can serve different students with their expertise, with a minimal time commitment since they just need to write a paragraph, and this same paragraph would be used by as many students’ teams as possible, and it would serve as a basis for responses made by the LLM.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
